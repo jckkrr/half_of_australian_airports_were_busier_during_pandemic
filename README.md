@@ -1,24 +1,19 @@
-![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
-
 # Half of Australian airports were busier during pandemic
 
-Business Insider Australia | September 2021
+<b>Business Insider Australia | September 2021</b>
 
 Most Australian airports were busier during the last financial year than pre-pandemic, an analysis of air traffic data has revealed, with FIFO workers in the west driving much of the demand.
 
 That's despite lockdowns grounding flights, decimating profits across the aviation industry and turning the country's busiest airports, like Sydney and Melbourne, into virtual mausoleums.
 
-While the overall number of planes in the air has been decimiated, at many of the country's smaller airports, runways are busier than in 2019.
+While the overall number of planes in the air has been decimiated, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceeded it.
 
-![image](https://user-images.githubusercontent.com/69304112/237016519-10e452e5-af05-4d98-9fa5-4bd5a71c586e.png)
+The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.
 
-![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
+![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
 
-The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.[graph 1 ; graph 2]
-
+### 
 At Boolgeeda, the Pilbara airport which services Rio Tinto’s Brockman 4 iron ore mine, Virgin is landing up to a dozen times a day at the moment. 
-
-![image](https://user-images.githubusercontent.com/69304112/237016992-ff12a24c-635f-4133-ae74-4e16aaf77d0d.png)
 
 Callion Airport, which sat disused in 2019, has welcomed hundreds of flights this year as Ora Banda ramps up its Davyhurst Gold Mine. 
 
@@ -27,8 +22,6 @@ And traffic at Ravensthorpe, which services First Quantum’s nickel mine west o
 An analysis of data from flightaware.com shows they are among hundreds of Australian airports - most of them in regional WA - that have seen an increase in traffic during the pandemic.
 
 The number of extra flights these airports are receiving are a fraction of those the industry has lost.[graph 3]
-
-![image](https://user-images.githubusercontent.com/69304112/237016614-4024cd61-77b4-4b0d-8f8b-7ae8101e0b56.png)
 
 But in WA, they reflect one of the big positives in the economy at large, and are one of the few glimmers of light in an otherwise gloomy time for aviation.
 
@@ -39,6 +32,8 @@ But in WA, they reflect one of the big positives in the economy at large, and ar
 “The charter flights that are often direct to private mine sites have increased pretty considerably since pre-pandemic times.
 
 “We’ve worked pretty closely with [the aviation industry] during the pandemic. We’ve done everything that we can to keep on going, and they responded amazingly.”
+
+![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
 
 Keeping the industry COVID-free and in full swing helped the state deliver a $5.6 billion surplus in this month’s budget. 
 
@@ -58,12 +53,7 @@ Over east, domestic holiday makers helped Ballina's Byron Gateway airport record
 
 Airports at Hamilton Island and Shute Harbour in Queensland's Whitsundays also saw strong growth in that period.
 
-![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
-![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
-![image](https://user-images.githubusercontent.com/69304112/237014966-ca4c392b-3fa8-4bbd-bef3-6a75b0eeb0b3.png)
-![image](https://user-images.githubusercontent.com/69304112/237015999-e2556ff8-d372-4da7-ac68-ec31aff0030e.png)
-![image](https://user-images.githubusercontent.com/69304112/237016326-539608f1-e44e-4002-a732-ab51dc553d90.png)
-
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/8874ee6a-f4a4-4df2-9ffa-80085289431f)
 
 But those gains are well and truly dwarfed by losses elsewhere, Tourism & Transport Forum Chief Executive Margy Osmond says.
 
@@ -81,3 +71,17 @@ Rob Carruthers doesn’t think so.
 “I expect the production landscape to remain strong through the mid-term. All the major producers have strong guidance around maintaining and incrementally increasing production. 
 
 “Clearly the demand for iron ore is going to be predominantly met by Western Australia producers in the short and medium term.”
+
+## Sourcing the data
+
+![image](https://user-images.githubusercontent.com/69304112/237016614-4024cd61-77b4-4b0d-8f8b-7ae8101e0b56.png)
+
+## Other visualisations
+![image](https://user-images.githubusercontent.com/69304112/237015999-e2556ff8-d372-4da7-ac68-ec31aff0030e.png) 
+![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
+![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/c10e856e-2d02-49bc-bef1-154841cf6919)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/5d2fa9d3-0ae1-424e-aab5-adf235b95964)
+🖠 Click to enlarge 
+![image](https://user-images.githubusercontent.com/69304112/237016519-10e452e5-af05-4d98-9fa5-4bd5a71c586e.png)
+
