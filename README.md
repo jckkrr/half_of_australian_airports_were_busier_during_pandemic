@@ -89,6 +89,8 @@ def getTrafficByIcao(airport_icao):
     df.insert(0, 'airport_icao', airport_icao)
     
     return df
+    
+ getTrafficByIcao('YMML')
  ```
 
 Being such a large country, there are hundreds of airports spread across Australia, many of the remote and infrequently used. A comprehensive list of each airport and its relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
