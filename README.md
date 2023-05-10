@@ -12,7 +12,99 @@ The uptick in flights across regional Western Australia has mirrored the buoyanc
 
 ![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
 
-### 
+<i>full article below</i> 
+
+## Methodology
+### Sourcing the data
+Data for this project was sourced from flightaware.com. Data for each discrete airport is stored on the site as .rvt files. 
+
+These can be accessed by running a query that references an airport four-letter International Civil Aviation Organization (ICAO) code. For Melbourne, for example, that means it requires YMML, rather than MEL, the three-letter IATA code that passengers to the airport will be familiar with.
+
+Automation was buily around the following function, makign the retrieval process quick, effiecent and repeatable.
+
+```
+def getTrafficByIcao(airport_icao):
+    
+    response = get('https://flightaware.com/ajax/ignoreuser/airport_stats.rvt', params = {'airport': airport_icao})
+    soup = BeautifulSoup(response.text, 'html.parser')
+    df = pd.DataFrame(json.loads(str(soup))['chart_data'])
+    df.insert(0, 'airport_icao', airport_icao)
+    
+    return df
+    
+ getTrafficByIcao('YMML')
+ ```
+
+Being such a large country, there are more than 1700 airports spread across Australia, many of the remote and infrequently used. A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
+
+```
+def getAusIcaoCodes():
+    
+    response = get('http://www.fallingrain.com/world/AS/airports.html', params = None)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    table = soup.find('table')
+        
+    df = pd.DataFrame(columns = [x.text for x in table.find_all('th')])
+    for tr in table.find_all('tr'):
+        if len(tr.find_all('th')) == 0:  ## ignore header
+            df.loc[df.shape[0]] = [x.text for x in tr.find_all('td')]
+                               
+    return df
+    
+getAusIcaoCodes()
+```
+
+### Analysing the data
+
+This produced a table containing 1589 ICAO codes (plus 100+ airports that are either too small to have a listed code or are listed as being closed).
+
+These codes code then be feed into the getTrafficByIcao function, one by one, with a csv of each set of results saved seperately.  
+
+The following code was used to produce a matrix of results, which from there could be analysed and the data and trends within reported on.
+
+```
+def makeMatrix():
+    
+    dfMATRIX = pd.DataFrame()
+
+    icaos = dfCODES[(dfCODES['ICAO'] != '') & (dfCODES['Kind'] != 'Closed')]['ICAO']
+
+    staryear_timestamps = {'2019': 1546300800, '2020': 1577750400, '2021': 1609372800, 'FY20': 1593475200, 'FY21': 1625011200}
+    def getSum(start_date, end_date, value_field):
+        return dfx[(dfx['date'] >= start_date) & (dfx['date'] < end_date)][value_field].sum()
+
+    for icao in icaos:
+
+        dfx = getTrafficByIcao(icao) 
+
+        for column in dfCODES.columns:
+            dfMATRIX.loc[icao, column] = dfCODES.loc[dfCODES['ICAO'] == icao, column].values[0]
+
+        for field_type in ['arrivals', 'departures']:
+            for year in [2019, 2020]:
+                dfMATRIX.loc[icao, f'{field_type}_{year}'] = getSum(staryear_timestamps[str(year)], staryear_timestamps[str(year+1)], field_type)
+            for year in [2020]:
+                dfMATRIX.loc[icao, f'{field_type}_FY20'] = getSum(staryear_timestamps['FY20'], staryear_timestamps['FY21'], field_type)
+                
+    return dfMATRIX
+
+makeMatrix()
+```
+
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/e02002fb-708a-46dc-ac89-a97af649090b)
+
+Analysing the data then produced a number of surprising results - and this lent itself to some revealing visualisations (see below).
+
+## FULL ARTICLE 
+
+Most Australian airports were busier during the last financial year than pre-pandemic, an analysis of air traffic data has revealed, with FIFO workers in the west driving much of the demand.
+
+That's despite lockdowns grounding flights, decimating profits across the aviation industry and turning the country's busiest airports, like Sydney and Melbourne, into virtual mausoleums.
+
+While the overall number of planes in the air has been decimiated, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceeded it.
+
+The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.
+
 At Boolgeeda, the Pilbara airport which services Rio Tinto’s Brockman 4 iron ore mine, Virgin is landing up to a dozen times a day at the moment. 
 
 Callion Airport, which sat disused in 2019, has welcomed hundreds of flights this year as Ora Banda ramps up its Davyhurst Gold Mine. 
@@ -72,45 +164,6 @@ Rob Carruthers doesn’t think so.
 
 “Clearly the demand for iron ore is going to be predominantly met by Western Australia producers in the short and medium term.”
 
-## Sourcing the data
-
-Data for this project was sourced from flightaware.com. Data for each discrete airport is stored on the site as .rvt files. 
-
-These can be accessed by running a query that references an airport four-letter International Civil Aviation Organization (ICAO) code. For Melbourne, for example, that means it requires YMML, rather than MEL, the three-letter IATA code that passengers to the airport will be familiar with.
-
-Automation was buily around the following function, makign the retrieval process quick, effiecent and repeatable.
-
-```
-def getTrafficByIcao(airport_icao):
-    
-    response = get('https://flightaware.com/ajax/ignoreuser/airport_stats.rvt', params = {'airport': airport_icao})
-    soup = BeautifulSoup(response.text, 'html.parser')
-    df = pd.DataFrame(json.loads(str(soup))['chart_data'])
-    df.insert(0, 'airport_icao', airport_icao)
-    
-    return df
-    
- getTrafficByIcao('YMML')
- ```
-
-Being such a large country, there are hundreds of airports spread across Australia, many of the remote and infrequently used. A comprehensive list of each airport and its relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
-
-```
-def getAusIcaoCodes():
-    
-    response = get('http://www.fallingrain.com/world/AS/airports.html', params = None)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    table = soup.find('table')
-        
-    df = pd.DataFrame(columns = [x.text for x in table.find_all('th')])
-    for tr in table.find_all('tr'):
-        if len(tr.find_all('th')) == 0:  ## ignore header
-            df.loc[df.shape[0]] = [x.text for x in tr.find_all('td')]
-                               
-    return df
-    
-getAusIcaoCodes()
-```
 
 ## Other visualisations
 ![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
