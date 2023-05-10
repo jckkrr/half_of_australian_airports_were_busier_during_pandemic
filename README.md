@@ -74,10 +74,43 @@ Rob Carruthers doesn’t think so.
 
 ## Sourcing the data
 
-![image](https://user-images.githubusercontent.com/69304112/237016614-4024cd61-77b4-4b0d-8f8b-7ae8101e0b56.png)
+Data for this project was sourced from flightaware.com. Data for each discrete airport is stored on the site as .rvt files. 
+
+These can be accessed by running a query that references an airport four-letter International Civil Aviation Organization (ICAO) code. For Melbourne, for example, that means it requires YMML, rather than MEL, the three-letter IATA code that passengers to the airport will be familiar with.
+
+Automation was buily around the following function, makign the retrieval process quick, effiecent and repeatable.
+
+```
+def getTrafficByIcao(airport_icao):
+    
+    response = get('https://flightaware.com/ajax/ignoreuser/airport_stats.rvt', params = {'airport': airport_icao})
+    soup = BeautifulSoup(response.text, 'html.parser')
+    df = pd.DataFrame(json.loads(str(soup))['chart_data'])
+    df.insert(0, 'airport_icao', airport_icao)
+    
+    return df
+ ```
+
+Being such a large country, there are hundreds of airports spread across Australia, many of the remote and infrequently used. A comprehensive list of each airport and its relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
+
+```
+def getAusIcaoCodes():
+    
+    response = get('http://www.fallingrain.com/world/AS/airports.html', params = None)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    table = soup.find('table')
+        
+    df = pd.DataFrame(columns = [x.text for x in table.find_all('th')])
+    for tr in table.find_all('tr'):
+        if len(tr.find_all('th')) == 0:  ## ignore header
+            df.loc[df.shape[0]] = [x.text for x in tr.find_all('td')]
+                               
+    return df
+    
+getAusIcaoCodes()
+```
 
 ## Other visualisations
-![image](https://user-images.githubusercontent.com/69304112/237015999-e2556ff8-d372-4da7-ac68-ec31aff0030e.png) 
 ![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
 ![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/c10e856e-2d02-49bc-bef1-154841cf6919)
