@@ -119,16 +119,15 @@ busier_airports.shape[0] / dfDROPNA.shape[0]
 
 ### Visualing the data
 
-![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
 
 How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
-One approach was to focus on the details and the compare like with like.or to normalise the data. This approach was used in these sparklines. 
+One approach was to focus on the details and the compare like with like.or to normalise the data. This approach was used in the sparklines above. 
 
 At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields.
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
 
 I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains, (see below) and used a map-style scatter line-scatter to show traffic over a week in which Melbourne was locked down - and its airport very quiet as a result.
 
