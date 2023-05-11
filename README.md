@@ -126,12 +126,12 @@ busier_airports.shape[0] / dfDROPNA.shape[0]
 
 How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
-One approach was to focus on the details and the compare like with like.or to normalise the data, such as in the sparklines above. 
+One approach was to focus on the details, to compare like with like, and to normalise the data, such as in the sparklines above. 
 
 At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields, as well as how they were comparing against other major hubs.
 
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
 
 I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains (see below), while a Marimekko (previous section) chart put a different perspective on how significant the chages were (though may have overemphasised the role of medium airports, as this list included the likes of Adelaide International). 
 
