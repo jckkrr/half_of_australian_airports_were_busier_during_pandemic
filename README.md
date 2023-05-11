@@ -117,6 +117,8 @@ busier_airports.shape[0] / dfDROPNA.shape[0]
 
 ### Visualing the data
 
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/ee3bc734-341a-4835-a5f6-e73d341fc2c9)
+
 How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
 This portion of a bubble chart reflects the difficulty: the amount of change is on the x-axis, the percentage chanage is on the y and the bubble sizes represent the amount of traffic in 2019.
