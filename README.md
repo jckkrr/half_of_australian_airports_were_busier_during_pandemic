@@ -105,10 +105,10 @@ fig.show()
 
 
 ```
-busier_airports = dfMATRIX[dfMATRIX['total_2019'] < dfMATRIX['total_FY2020']]
+busier_airports = dfDROPNA[dfDROPNA['change_group'] == 'busier']
 busier_airports
 ```
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6a3c30cc-f12b-458b-96c1-19ee6bed5984)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/eea034f5-9eeb-4ced-be53-af31b0257124)
 
 ```
 busier_airports = dfDROPNA[dfDROPNA['change_group'] == 'busier']
