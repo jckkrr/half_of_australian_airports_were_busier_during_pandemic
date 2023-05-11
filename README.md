@@ -6,7 +6,7 @@ Most Australian airports were busier during the last financial year than pre-pan
 
 That's despite lockdowns grounding flights, decimating profits across the aviation industry and turning the country's busiest airports, like Sydney and Melbourne, into virtual mausoleums.
 
-While the overall number of planes in the air has been drastically reduced, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceeded it.
+While the overall number of planes in the air has been drastically reduced, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceded it.
 
 The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.
 
@@ -17,7 +17,7 @@ The uptick in flights across regional Western Australia has mirrored the buoyanc
 ## Methodology
 ### Sourcing the data
 
-At the heart of this project is a very basic function that retrieves and save the data for individual airports from a popular flight tracking service. 
+At the heart of this project is a very basic function that retrieves and saves the data for individual airports from a popular flight tracking service. 
 
 This can be accessed by running a query that references an airport four-letter International Civil Aviation Organization (ICAO) code. 
 
@@ -28,7 +28,7 @@ getTrafficByIcao('YMML')
 ```
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/90448deb-6c08-4f30-9f2e-6a4db05d9d1a)
 
-After building this basic function, it meant the data collection process could then be automated, making it quick, effiecent and repeatable. 
+After building this basic function, it meant the data collection process could then be automated, making it quick, efficient and repeatable. 
 
 To do that though, access to all the country's ICAO codes would be required.
 
@@ -36,7 +36,7 @@ To do that though, access to all the country's ICAO codes would be required.
 
 Australia has more than 1700 airports spread across the continent, many of the remote and infrequently used. 
 
-A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with a similar function to one above, though this time built to extract data from HTML tables.
+A comprehensive list showing each of these airports and their relevant details was found in an HTML table at fallingrain.com, and downloaded with a similar function to the one above, though this time built to extract data from HTML tables.
 
 ```    
 dfCODES = getAusIcaoCodes()
@@ -47,9 +47,9 @@ dfCODES[0:10]
 
 This produced a table containing 1589 ICAO codes. More than a hundred airports that are either too small to have a listed code or are listed as being closed were excluded from the list.
 
-These codes code then be feed into the getTrafficByIcao function, one by one, with a CSV of each set of results saved seperately.  
+These codes code then be fed into the getTrafficByIcao function, one by one, with a CSV of each set of results saved separately.  
 
-The following code was used to produce a matrix of results. This could then be analysed and the data and trends within it reported on.
+The following was used to produce a matrix of results. This could then be analysed and the data and trends within it reported on.
 
 ```
 def makeMatrix():
@@ -87,7 +87,7 @@ Analysing the data then produced the surprising result that just over half the c
 
 Data for 2019 and FY20 could be found for over 1,000 airports (excluding those with no traffic in either period).
 
-Of these, 505 saw an increase in traffic for the two periods, though as the histogram below shows, the changes where often marginal when compared to the losses.
+Of these, 505 saw an increase in traffic for the two periods, though as the histogram below shows, the changes were often marginal when compared to the losses.
 
 ```
 dfDROPNA = dfMATRIX.copy()
@@ -128,12 +128,12 @@ How do illustrate a trend in traffic data when the numbers are so vastly differe
 
 One approach was to focus on the details, to compare like with like, and to normalise the data, such as in the sparklines above. 
 
-At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields, as well as how they were comparing against other major hubs.
+At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields, as well as how they compared against other major hubs.
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
 
-I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains (see below), while a Marimekko (previous section) chart put a different perspective on how significant the chages were (though may have overemphasised the role of medium airports, as this list included the likes of Adelaide International). 
+I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains (see below), while a Marimekko (previous section) chart put a different perspective on how significant the changes were (though may have overemphasised the role of medium airports, as this list included the likes of Adelaide International). 
 
 A map-style scatter line-scatter, showing traffic over a week in which Melbourne was locked down, highlighted how quiet the city had become (but also how much 'base-level' traffic still went through the airport).
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/272fdd50-1717-44d9-b50d-fff8dcb88569)
@@ -145,7 +145,7 @@ Most Australian airports were busier during the last financial year than pre-pan
 
 That's despite lockdowns grounding flights, decimating profits across the aviation industry and turning the country's busiest airports, like Sydney and Melbourne, into virtual mausoleums.
 
-While the overall number of planes in the air has been decimiated, at many of the country's smaller airports, runways have been busier in FY20, the first post-COVID, than in 2019, the year that preceeded its arrival.
+While the overall number of planes in the air has been drastically reduced, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceded it.
 
 The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.
 
