@@ -123,20 +123,25 @@ busier_airports.shape[0] / dfDROPNA.shape[0]
 
 ### Visualing the data
 
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/2650dc5a-c75a-4690-a09e-b45263bfd710)
+
+
+
 
 How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
-One approach was to focus on the details and the compare like with like.or to normalise the data. This approach was used in the sparklines above. 
+One approach was to focus on the details and the compare like with like.or to normalise the data, such as in the sparklines in the previous section. 
 
-At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields.
-
+At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields, as well as how they were comparing against other major hubs.
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
 
-I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains, (see below) and used a map-style scatter line-scatter to show traffic over a week in which Melbourne was locked down - and its airport very quiet as a result.
 
+I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains (see below), while a Marimekko chart put a different perspective on how significant the chages were. 
+
+A map-style scatter line-scatter, showing traffic over a week in which Melbourne was locked down, highlighted how quiet the city had become (but also how much 'base-level' traffic still went through the airport).
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/272fdd50-1717-44d9-b50d-fff8dcb88569)
+
 
 ## FULL ARTICLE 
 
