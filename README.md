@@ -36,7 +36,7 @@ To do that though, access to all the country's ICAO codes would be required.
 
 Australia has more than 1700 airports spread across the continent, many of the remote and infrequently used. 
 
-A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
+A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with a similar function to one above, though this time built to extract data from HTML tables.
 
 ```    
 dfCODES = getAusIcaoCodes()
@@ -45,11 +45,11 @@ dfCODES[0:10]
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/31341873-c48a-49dd-b3c1-bac1ee43601e)
 
-This produced a table containing 1589 ICAO codes. (More than a hundred airports that are either too small to have a listed code or are listed as being closed were excluded from the list).
+This produced a table containing 1589 ICAO codes. More than a hundred airports that are either too small to have a listed code or are listed as being closed were excluded from the list.
 
-These codes code then be feed into the getTrafficByIcao function, one by one, with a csv of each set of results saved seperately.  
+These codes code then be feed into the getTrafficByIcao function, one by one, with a CSV of each set of results saved seperately.  
 
-The following code was used to produce a matrix of results, which from there could be analysed and the data and trends within reported on.
+The following code was used to produce a matrix of results. This could then be analysed and the data and trends within it reported on.
 
 ```
 def makeMatrix():
