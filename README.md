@@ -10,7 +10,7 @@ While the overall number of planes in the air has been decimiated, at many of th
 
 The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.
 
-![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/ee3bc734-341a-4835-a5f6-e73d341fc2c9)
 
 <i>full article below</i> 
 
@@ -78,6 +78,8 @@ dfMATRIX
 
 ### Analysing the data
 
+![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
+
 Analysing the data then produced the surprising result that just over half the country's airports had experienced an increase in traffic.
 
 Data for 2019 and FY20 could be found for over 1,000 airports (excluding those with no traffic in either period).
@@ -117,32 +119,18 @@ busier_airports.shape[0] / dfDROPNA.shape[0]
 
 ### Visualing the data
 
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/ee3bc734-341a-4835-a5f6-e73d341fc2c9)
+![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
 
 How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
-This portion of a bubble chart reflects the difficulty: the amount of change is on the x-axis, the percentage chanage is on the y and the bubble sizes represent the amount of traffic in 2019.
-
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/5f0eaea8-f2cb-4580-85f7-d24d4a64e246)
-
-One approach was to focus on the details and the compare like with like.or to normalise the data. 
-
-This approach was used in the sparklines seen at the top of this page. 
-
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/c2a35869-7543-4392-9ca5-3ae2b9b2280f)
+One approach was to focus on the details and the compare like with like.or to normalise the data. This approach was used in these sparklines. 
 
 At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields.
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
 
-![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
-
-![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
-
-I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains. 
-![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
-
-This map-style scatter line-scatter shows traffic over a week in which Melbourne was locked down.
+I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains, (see below) and used a map-style scatter line-scatter to show traffic over a week in which Melbourne was locked down - and its airport very quiet as a result.
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/272fdd50-1717-44d9-b50d-fff8dcb88569)
 
@@ -178,7 +166,9 @@ But in WA, they reflect one of the big positives in the economy at large, and ar
 
 Keeping the industry COVID-free and in full swing helped the state deliver a $5.6 billion surplus in this month’s budget. 
 
-It’s also been a small win for Perth Airport, the hub for most of these flights. Arrivals and departures have fallen less drastically there than at its major east coast counterparts.[graph 4]
+It’s also been a small win for Perth Airport, the hub for most of these flights. Arrivals and departures have fallen less drastically there than at its major east coast counterparts.
+
+![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
 
 Through parts of the pandemic, Perth has even had the busiest runways in the country. And while Sydney and Melbourne slumped to previously unthinkable lows, it notched up its busiest June for regional passenger numbers on record, the airport said. 
 
@@ -213,7 +203,13 @@ Rob Carruthers doesn’t think so.
 
 
 ## Other visualisations
+![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
 
 ![image](https://user-images.githubusercontent.com/69304112/237016519-10e452e5-af05-4d98-9fa5-4bd5a71c586e.png)
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/b040a74a-2b85-4e42-bf8f-076556c0f8c1)
+
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/5f0eaea8-f2cb-4580-85f7-d24d4a64e246)
+
+![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
+
