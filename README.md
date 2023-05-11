@@ -6,7 +6,7 @@ Most Australian airports were busier during the last financial year than pre-pan
 
 That's despite lockdowns grounding flights, decimating profits across the aviation industry and turning the country's busiest airports, like Sydney and Melbourne, into virtual mausoleums.
 
-While the overall number of planes in the air has been decimiated, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceeded it.
+While the overall number of planes in the air has been drastically reduced, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceeded it.
 
 The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.
 
@@ -28,7 +28,9 @@ getTrafficByIcao('YMML')
 ```
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/90448deb-6c08-4f30-9f2e-6a4db05d9d1a)
 
-This basic function meant the data collection process could then automated, making it quick, effiecent and repeatable. But first, we needed to know all the country's ICAO codes.
+After building this basic function, it meant the data collection process could then be automated, making it quick, effiecent and repeatable. 
+
+To do that though, required access to all the country's ICAO codes.
 
 ### Automating the data collection
 
