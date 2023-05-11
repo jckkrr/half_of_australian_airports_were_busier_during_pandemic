@@ -22,20 +22,7 @@ These can be accessed by running a query that references an airport four-letter 
 
 Automation was buily around the following function, makign the retrieval process quick, effiecent and repeatable.
 
-```
-def getTrafficByIcao(airport_icao):
-    
-    response = get('https://flightaware.com/ajax/ignoreuser/airport_stats.rvt', params = {'airport': airport_icao})
-    soup = BeautifulSoup(response.text, 'html.parser')
-    df = pd.DataFrame(json.loads(str(soup))['chart_data'])
-    df.insert(0, 'airport_icao', airport_icao)
-    
-    if 'date' in df.columns: ## to filter out empty dataframes
-        df[['YYYY', 'MM', 'DD']] = df['date'].apply(lambda x: datetime.datetime.fromtimestamp(x).strftime("%Y,%m,%d")).str.split(',', expand = True)
-        df = df[['airport_icao', 'date', 'YYYY', 'MM', 'DD', 'arrivals', 'departures']]
-        
-    return df
-    
+```    
 getTrafficByIcao('YMML')
 ```
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/90448deb-6c08-4f30-9f2e-6a4db05d9d1a)
@@ -120,7 +107,7 @@ Most Australian airports were busier during the last financial year than pre-pan
 
 That's despite lockdowns grounding flights, decimating profits across the aviation industry and turning the country's busiest airports, like Sydney and Melbourne, into virtual mausoleums.
 
-While the overall number of planes in the air has been decimiated, at many of the country's smaller airports, runways have been busier in FY20-21, the first since the arrival of COVID, than in 2019, the year that preceeded it.
+While the overall number of planes in the air has been decimiated, at many of the country's smaller airports, runways have been busier in FY20, the first post-COVID, than in 2019, the year that preceeded its arrival.
 
 The uptick in flights across regional Western Australia has mirrored the buoyancy in the price of resources and the state’s renewed appetite for mining exploration.
 
@@ -132,7 +119,9 @@ And traffic at Ravensthorpe, which services First Quantum’s nickel mine west o
  
 An analysis of data from flightaware.com shows they are among hundreds of Australian airports - most of them in regional WA - that have seen an increase in traffic during the pandemic.
 
-The number of extra flights these airports are receiving are a fraction of those the industry has lost.[graph 3]
+The number of extra flights these airports are receiving are a fraction of those the industry has lost.
+
+![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
 
 But in WA, they reflect one of the big positives in the economy at large, and are one of the few glimmers of light in an otherwise gloomy time for aviation.
 
@@ -143,8 +132,6 @@ But in WA, they reflect one of the big positives in the economy at large, and ar
 “The charter flights that are often direct to private mine sites have increased pretty considerably since pre-pandemic times.
 
 “We’ve worked pretty closely with [the aviation industry] during the pandemic. We’ve done everything that we can to keep on going, and they responded amazingly.”
-
-![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
 
 Keeping the industry COVID-free and in full swing helped the state deliver a $5.6 billion surplus in this month’s budget. 
 
