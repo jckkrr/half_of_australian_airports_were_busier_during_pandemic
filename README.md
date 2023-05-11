@@ -124,6 +124,7 @@ busier_airports.shape[0] / dfDROPNA.shape[0]
 ### Visualing the data
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/2650dc5a-c75a-4690-a09e-b45263bfd710)
 
 How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
