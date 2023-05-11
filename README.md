@@ -81,8 +81,7 @@ dfMATRIX
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/bba0cc00-627b-42c7-91d8-20fca96ba121)
 
 ### Analysing the data
-
-![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/2650dc5a-c75a-4690-a09e-b45263bfd710)
 
 Analysing the data then produced the surprising result that just over half the country's airports had experienced an increase in traffic.
 
@@ -123,21 +122,18 @@ busier_airports.shape[0] / dfDROPNA.shape[0]
 
 ### Visualing the data
 
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/2650dc5a-c75a-4690-a09e-b45263bfd710)
-
-
-
+![image](https://user-images.githubusercontent.com/69304112/237011019-a9b9a359-656e-4d29-87fc-7a74c1cc95b2.png)
 
 How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
-One approach was to focus on the details and the compare like with like.or to normalise the data, such as in the sparklines in the previous section. 
+One approach was to focus on the details and the compare like with like.or to normalise the data, such as in the sparklines above. 
 
 At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields, as well as how they were comparing against other major hubs.
+
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/16f4ed2a-602c-4072-84a4-672698dc744f)
 
-
-I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains (see below), while a Marimekko chart put a different perspective on how significant the chages were. 
+I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains (see below), while a Marimekko (previous section) chart put a different perspective on how significant the chages were (though may have overemphasised the role of medium airports, as this list included the likes of Adelaide International). 
 
 A map-style scatter line-scatter, showing traffic over a week in which Melbourne was locked down, highlighted how quiet the city had become (but also how much 'base-level' traffic still went through the airport).
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/272fdd50-1717-44d9-b50d-fff8dcb88569)
