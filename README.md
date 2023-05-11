@@ -30,11 +30,13 @@ getTrafficByIcao('YMML')
 
 After building this basic function, it meant the data collection process could then be automated, making it quick, effiecent and repeatable. 
 
-To do that though, required access to all the country's ICAO codes.
+To do that though, access to all the country's ICAO codes would be required.
 
 ### Automating the data collection
 
-Being such a large country, there are more than 1700 airports spread across Australia, many of the remote and infrequently used. A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
+Australia has more than 1700 airports spread across the continent, many of the remote and infrequently used. 
+
+A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
 
 ```    
 dfCODES = getAusIcaoCodes()
