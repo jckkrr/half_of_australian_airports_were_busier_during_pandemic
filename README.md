@@ -52,8 +52,6 @@ def makeMatrix():
     
     dfMATRIX = dfCODES.copy() 
     
-    timestamps = {'2019': 1546300800, '2020': 1577750400, '2021': 1609372800, 'FY20': 1593475200, 'FY21': 1625011200}  ### for beginning of years, as match timestamps in downloaded data
-
     for index, row in dfMATRIX.iterrows():
         
         print(row['ICAO'], end=' ')
@@ -62,16 +60,14 @@ def makeMatrix():
                 
         if dfx.shape[0] != 0:
         
-            for year in ['2019', '2020']:
-                start_date, end_date = timestamps[year], timestamps[str(int(year) + 1)]
-                sums = dfx[(dfx['date'] >= start_date) & (dfx['date'] < end_date)][['arrivals', 'departures']].sum()
+            for year in ['2019', '2020', '2021', '2022']:
+                sums = dfx[dfx['YYYY'] == year][['arrivals', 'departures']].sum()
                 dfMATRIX.loc[index, [f'arrivals_{year}', f'departures_{year}' ,f'total_{year}']] = sums['arrivals'], sums['departures'], sums['arrivals'] + sums['departures']
 
-                if year == '2020':
-                    start_date_FY, end_date_FY = timestamps['FY' + year[2:]], timestamps['FY' + str(int(year[2:])+1)]
-                    sums = dfx[(dfx['date'] >= start_date_FY) & (dfx['date'] < end_date_FY)][['arrivals', 'departures']].sum()
+                if year in ['2020', '2021']:
+                    sums = dfx[((dfx['YYYY'] == year) & (dfx['MM'].isin(['07', '08', '09', '10', '11', '12']))) | ((dfx['YYYY'] == str(int(year) + 1)) & (dfx['MM'].isin(['01', '02', '03', '04', '05', '06'])))][['arrivals', 'departures']].sum()
                     dfMATRIX.loc[index, [f'arrivals_FY{year}', f'departures_FY{year}' ,f'total_FY{year}']] = sums['arrivals'], sums['departures'], sums['arrivals'] + sums['departures']
-    
+                    
     return dfMATRIX
 
 dfMATRIX = makeMatrix()
@@ -86,7 +82,7 @@ Analysing the data then produced the surprising result that just over half the c
 
 Data for 2019 and FY20 could be found for over 1,000 airports (excluding those with no traffic in either period).
 
-Of these, 504 saw an increase in traffic for the two periods, though as the histogram below shows, the changes where often marginal when compared to the losses.
+Of these, 505 saw an increase in traffic for the two periods, though as the histogram below shows, the changes where often marginal when compared to the losses.
 
 ```
 dfDROPNA = dfMATRIX.copy()
@@ -105,25 +101,48 @@ fig.show()
 
 
 ```
-busier_airports = dfDROPNA[dfDROPNA['change_group'] == 'busier']
-busier_airports
+busier_airports = dfDROPNA.copy()[dfDROPNA['change_group'] == 'busier']
+busier_airports['change_%'] = round(busier_airports['change_amount'] / busier_airports['total_2019'] * 100, 2)
+busier_airports.sort_values(by=['change_amount'], ascending = False)busier_airports
 ```
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/eea034f5-9eeb-4ced-be53-af31b0257124)
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/f6633bfd-bcb3-4147-8582-85d60123c628)
 
 ```
 busier_airports = dfDROPNA[dfDROPNA['change_group'] == 'busier']
 busier_airports.shape[0] / dfDROPNA.shape[0]
 
->>> 0.5024925224327019
+>>> 0.5044955044955045
 ```
 
 
+### Visualing the data
 
+How do illustrate a trend in traffic data when the numbers are so vastly different and disproportionate? 
 
+This portion of a bubble chart reflects the difficulty: the amount of change is on the x-axis, the percentage chanage is on the y and the bubble sizes represent the amount of traffic in 2019.
 
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/5f0eaea8-f2cb-4580-85f7-d24d4a64e246)
 
+One approach was to focus on the details and the compare like with like.or to normalise the data. 
 
+This approach was used in the sparklines seen at the top of this page. 
 
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/c2a35869-7543-4392-9ca5-3ae2b9b2280f)
+
+At the other end of the scale, comparing major airports -- which are regional hubs -- indirectly told the story of their state's smaller airfields.
+
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6b2f167f-02ec-4bb5-80b2-83436e82f378)
+
+![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
+
+![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
+
+I also borrowed the idea of 'box-scatter' plots from Bloomberg, which illustrated how the losses dwarfed the gains. 
+![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
+
+This map-style scatter line-scatter shows traffic over a week in which Melbourne was locked down.
+
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/272fdd50-1717-44d9-b50d-fff8dcb88569)
 
 ## FULL ARTICLE 
 
@@ -144,8 +163,6 @@ And traffic at Ravensthorpe, which services First Quantum’s nickel mine west o
 An analysis of data from flightaware.com shows they are among hundreds of Australian airports - most of them in regional WA - that have seen an increase in traffic during the pandemic.
 
 The number of extra flights these airports are receiving are a fraction of those the industry has lost.
-
-![image](https://user-images.githubusercontent.com/69304112/237012544-167e1bf5-d1d9-41b7-90b2-952aefa0f5fc.png)
 
 But in WA, they reflect one of the big positives in the economy at large, and are one of the few glimmers of light in an otherwise gloomy time for aviation.
 
@@ -175,8 +192,6 @@ Over east, domestic holiday makers helped Ballina's Byron Gateway airport record
 
 Airports at Hamilton Island and Shute Harbour in Queensland's Whitsundays also saw strong growth in that period.
 
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/8874ee6a-f4a4-4df2-9ffa-80085289431f)
-
 But those gains are well and truly dwarfed by losses elsewhere, Tourism & Transport Forum Chief Executive Margy Osmond says.
 
 “While there certainly have been some key tourism destinations that have experienced greater numbers of passengers through their airports, this was mainly due to travel within their own states due to the uncertainty around domestic borders. 
@@ -196,11 +211,7 @@ Rob Carruthers doesn’t think so.
 
 
 ## Other visualisations
-![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
-![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/272fdd50-1717-44d9-b50d-fff8dcb88569)
-
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/b040a74a-2b85-4e42-bf8f-076556c0f8c1)
 
 ![image](https://user-images.githubusercontent.com/69304112/237016519-10e452e5-af05-4d98-9fa5-4bd5a71c586e.png)
 
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/b040a74a-2b85-4e42-bf8f-076556c0f8c1)
