@@ -30,10 +30,15 @@ def getTrafficByIcao(airport_icao):
     df = pd.DataFrame(json.loads(str(soup))['chart_data'])
     df.insert(0, 'airport_icao', airport_icao)
     
+    if 'date' in df.columns: ## to filter out empty dataframes
+        df[['YYYY', 'MM', 'DD']] = df['date'].apply(lambda x: datetime.datetime.fromtimestamp(x).strftime("%Y,%m,%d")).str.split(',', expand = True)
+        df = df[['airport_icao', 'date', 'YYYY', 'MM', 'DD', 'arrivals', 'departures']]
+        
     return df
     
- getTrafficByIcao('YMML')
- ```
+getTrafficByIcao('YMML')
+```
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/90448deb-6c08-4f30-9f2e-6a4db05d9d1a)
 
 Being such a large country, there are more than 1700 airports spread across Australia, many of the remote and infrequently used. A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
 
@@ -46,13 +51,26 @@ def getAusIcaoCodes():
         
     df = pd.DataFrame(columns = [x.text for x in table.find_all('th')])
     for tr in table.find_all('tr'):
-        if len(tr.find_all('th')) == 0:  ## ignore header
+        if len(tr.find_all('th')) == 0:  ## to ignore header row
             df.loc[df.shape[0]] = [x.text for x in tr.find_all('td')]
-                               
+      
+    df = df[(df['ICAO'] != '') & (df['Kind'] != 'Closed')]
+    
+    df['Latitude'] = df['Latitude'].apply(lambda x: re.search('(.+)\(S\)', x).group(1)).astype(float)
+    df['Longitude'] = df['Longitude'].apply(lambda x: re.search('(.+)\(E\)', x).group(1)).astype(float)
+    
+    df.loc[df['Airlines'] == '', 'Airlines'] = '0'
+    df['Airlines'] = df['Airlines'].astype(int)
+    
+    df = df.drop(columns=['FAA']).sort_values(by=['Airlines'], ascending = False).reset_index(drop=True)
+
     return df
     
-getAusIcaoCodes()
+dfCODES = getAusIcaoCodes()
+dfCODES[0:10]
 ```
+
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/31341873-c48a-49dd-b3c1-bac1ee43601e)
 
 ### Analysing the data
 
@@ -65,34 +83,35 @@ The following code was used to produce a matrix of results, which from there cou
 ```
 def makeMatrix():
     
-    dfMATRIX = pd.DataFrame()
+    dfMATRIX = dfCODES.copy() 
+    
+    timestamps = {'2019': 1546300800, '2020': 1577750400, '2021': 1609372800, 'FY20': 1593475200, 'FY21': 1625011200}  ### for beginning of years, as match timestamps in downloaded data
 
-    icaos = dfCODES[(dfCODES['ICAO'] != '') & (dfCODES['Kind'] != 'Closed')]['ICAO']
+    for index, row in dfMATRIX.iterrows():
+        
+        print(row['ICAO'], end=' ')
 
-    staryear_timestamps = {'2019': 1546300800, '2020': 1577750400, '2021': 1609372800, 'FY20': 1593475200, 'FY21': 1625011200}
-    def getSum(start_date, end_date, value_field):
-        return dfx[(dfx['date'] >= start_date) & (dfx['date'] < end_date)][value_field].sum()
-
-    for icao in icaos:
-
-        dfx = getTrafficByIcao(icao) 
-
-        for column in dfCODES.columns:
-            dfMATRIX.loc[icao, column] = dfCODES.loc[dfCODES['ICAO'] == icao, column].values[0]
-
-        for field_type in ['arrivals', 'departures']:
-            for year in [2019, 2020]:
-                dfMATRIX.loc[icao, f'{field_type}_{year}'] = getSum(staryear_timestamps[str(year)], staryear_timestamps[str(year+1)], field_type)
-            for year in [2020]:
-                dfMATRIX.loc[icao, f'{field_type}_FY20'] = getSum(staryear_timestamps['FY20'], staryear_timestamps['FY21'], field_type)
+        dfx = getTrafficByIcao(row['ICAO'])
                 
+        if dfx.shape[0] != 0:
+        
+            for year in ['2019', '2020']:
+                start_date, end_date = timestamps[year], timestamps[str(int(year) + 1)]
+                sums = dfx[(dfx['date'] >= start_date) & (dfx['date'] < end_date)][['arrivals', 'departures']].sum()
+                dfMATRIX.loc[index, [f'arrivals_{year}', f'departures_{year}' ,f'total_{year}']] = sums['arrivals'], sums['departures'], sums['arrivals'] + sums['departures']
+
+                if year == '2020':
+                    start_date_FY, end_date_FY = timestamps['FY' + year[2:]], timestamps['FY' + str(int(year[2:])+1)]
+                    sums = dfx[(dfx['date'] >= start_date_FY) & (dfx['date'] < end_date_FY)][['arrivals', 'departures']].sum()
+                    dfMATRIX.loc[index, [f'arrivals_FY{year}', f'departures_FY{year}' ,f'total_FY{year}']] = sums['arrivals'], sums['departures'], sums['arrivals'] + sums['departures']
+    
     return dfMATRIX
 
-makeMatrix()
+dfMATRIX = makeMatrix()
+dfMATRIX[0:10]
 ```
 
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/e02002fb-708a-46dc-ac89-a97af649090b)
-
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/3392f687-1321-4096-8c78-d0fdd1b7f2bf)
 Analysing the data then produced a number of surprising results - and this lent itself to some revealing visualisations (see below).
 
 ## FULL ARTICLE 
