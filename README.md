@@ -16,52 +16,32 @@ The uptick in flights across regional Western Australia has mirrored the buoyanc
 
 ## Methodology
 ### Sourcing the data
-Data for this project was sourced from flightaware.com. Data for each discrete airport is stored on the site as .rvt files. 
 
-These can be accessed by running a query that references an airport four-letter International Civil Aviation Organization (ICAO) code. For Melbourne, for example, that means it requires YMML, rather than MEL, the three-letter IATA code that passengers to the airport will be familiar with.
+At the heart of this project is a very basic function that retrieves and save the data for individual airports from a popular flight tracking service. 
 
-Automation was buily around the following function, makign the retrieval process quick, effiecent and repeatable.
+This can be accessed by running a query that references an airport four-letter International Civil Aviation Organization (ICAO) code. 
+
+For Melbourne, for example, that means it requires YMML, rather than MEL, the three-letter IATA code that passengers to the airport will be familiar with.
 
 ```    
 getTrafficByIcao('YMML')
 ```
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/90448deb-6c08-4f30-9f2e-6a4db05d9d1a)
 
+This basic function meant the data collection process could then automated, making it quick, effiecent and repeatable. But first, we needed to know all the country's ICAO codes.
+
+### Automating the data collection
+
 Being such a large country, there are more than 1700 airports spread across Australia, many of the remote and infrequently used. A comprehensive list showing each of these airports and their relevant details was found in a HTML table at fallingrain.com, and downloaded with the following code.
 
-```
-def getAusIcaoCodes():
-    
-    response = get('http://www.fallingrain.com/world/AS/airports.html', params = None)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    table = soup.find('table')
-        
-    df = pd.DataFrame(columns = [x.text for x in table.find_all('th')])
-    for tr in table.find_all('tr'):
-        if len(tr.find_all('th')) == 0:  ## to ignore header row
-            df.loc[df.shape[0]] = [x.text for x in tr.find_all('td')]
-      
-    df = df[(df['ICAO'] != '') & (df['Kind'] != 'Closed')]
-    
-    df['Latitude'] = df['Latitude'].apply(lambda x: re.search('(.+)\(S\)', x).group(1)).astype(float)
-    df['Longitude'] = df['Longitude'].apply(lambda x: re.search('(.+)\(E\)', x).group(1)).astype(float)
-    
-    df.loc[df['Airlines'] == '', 'Airlines'] = '0'
-    df['Airlines'] = df['Airlines'].astype(int)
-    
-    df = df.drop(columns=['FAA']).sort_values(by=['Airlines'], ascending = False).reset_index(drop=True)
-
-    return df
-    
+```    
 dfCODES = getAusIcaoCodes()
 dfCODES[0:10]
 ```
 
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/31341873-c48a-49dd-b3c1-bac1ee43601e)
 
-### Analysing the data
-
-This produced a table containing 1589 ICAO codes (plus 100+ airports that are either too small to have a listed code or are listed as being closed).
+This produced a table containing 1589 ICAO codes. (More than a hundred airports that are either too small to have a listed code or are listed as being closed were excluded from the list).
 
 These codes code then be feed into the getTrafficByIcao function, one by one, with a csv of each set of results saved seperately.  
 
@@ -95,11 +75,55 @@ def makeMatrix():
     return dfMATRIX
 
 dfMATRIX = makeMatrix()
-dfMATRIX[0:10]
+dfMATRIX
 ```
 
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/3392f687-1321-4096-8c78-d0fdd1b7f2bf)
-Analysing the data then produced a number of surprising results - and this lent itself to some revealing visualisations (see below).
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/bba0cc00-627b-42c7-91d8-20fca96ba121)
+
+### Analysing the data
+
+Analysing the data then produced the surprising result that just over half the country's airports had experienced an increase in traffic.
+
+Data for 2019 and FY20 could be found for over 1,000 airports (excluding those with no traffic in either period).
+
+Of these, 504 saw an increase in traffic for the two periods, though as the histogram below shows, the changes where often marginal when compared to the losses.
+
+```
+dfDROPNA = dfMATRIX.copy()
+dfDROPNA = dfDROPNA.dropna(subset=['total_2019', 'total_FY2020'])
+dfDROPNA = dfDROPNA[(dfDROPNA['total_2019'] > 0) & (dfDROPNA['total_FY2020'] > 0)]
+dfDROPNA = dfDROPNA.reset_index(drop=True)
+dfDROPNA['change_group'] = np.where(dfDROPNA['total_2019'] < dfDROPNA['total_FY2020'], 'busier', np.where(dfDROPNA['total_2019'] == dfDROPNA['total_FY2020'], 'equal', np.where(dfDROPNA['total_2019'] > dfDROPNA['total_FY2020'], 'quiter', '???')))
+
+fig = px.histogram(dfDROPNA[dfDROPNA['change_group'] != 'equal'], x="change_amount", color = 'change_group', marginal="rug", nbins=100) #   log_x=True  marginal="rug", log_y=True
+customChartDefaultStyling.styling(fig)
+fig.update_layout(height = 500)
+fig.show()
+```
+
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/402f89be-1b9a-4bf7-959a-689c7c1c7623)
+
+
+```
+busier_airports = dfMATRIX[dfMATRIX['total_2019'] < dfMATRIX['total_FY2020']]
+busier_airports
+```
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/6a3c30cc-f12b-458b-96c1-19ee6bed5984)
+
+```
+busier_airports = dfDROPNA[dfDROPNA['change_group'] == 'busier']
+busier_airports.shape[0] / dfDROPNA.shape[0]
+
+>>> 0.5024925224327019
+```
+
+
+
+
+
+
+
+
 
 ## FULL ARTICLE 
 
@@ -174,8 +198,11 @@ Rob Carruthers doesn’t think so.
 ## Other visualisations
 ![image](https://user-images.githubusercontent.com/69304112/237014822-a1ad21aa-c017-4935-976f-d805360fac0c.png)
 ![image](https://user-images.githubusercontent.com/69304112/237015684-ba4680ed-4e50-4f1d-b6ec-7e5e4e38eb87.png)
+
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/c10e856e-2d02-49bc-bef1-154841cf6919)
+
 ![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/5d2fa9d3-0ae1-424e-aab5-adf235b95964)
 🖠 Click to enlarge 
+
 ![image](https://user-images.githubusercontent.com/69304112/237016519-10e452e5-af05-4d98-9fa5-4bd5a71c586e.png)
 
