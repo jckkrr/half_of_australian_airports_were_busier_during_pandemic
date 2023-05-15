@@ -1,4 +1,4 @@
-# Half of Australian airports were busier during pandemic
+# Half of Australian airports were busier during the pandemic
 
 <b>Business Insider Australia | September 2021</b>
 
