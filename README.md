@@ -1,7 +1,9 @@
+![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/ee3bc734-341a-4835-a5f6-e73d341fc2c9)
+
 # Half of Australian airports were busier during the pandemic
 
 <b>Business Insider Australia | September 2021</b>
-![image](https://github.com/jckkrr/half_of_australian_airports_were_busier_during_pandemic/assets/69304112/ee3bc734-341a-4835-a5f6-e73d341fc2c9)
+
 Most Australian airports were busier during the last financial year than pre-pandemic, an analysis of air traffic data has revealed, with FIFO workers in the west driving much of the demand.
 
 That's despite lockdowns grounding flights, decimating profits across the aviation industry and turning the country's busiest airports, like Sydney and Melbourne, into virtual mausoleums.
